@@ -1,0 +1,9 @@
+*{
+    margin: 0;
+}
+
+.top_panel{
+    background-color: #2564cf;
+    width: 100%;
+    height: 3rem;
+}
