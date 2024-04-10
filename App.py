@@ -4,12 +4,12 @@ app = Flask(__name__)
 
 
 @app.route('/tasks/today')
-def home_page():
+def homepage():
     return render_template('index.html', action='Мой день')
 
 
 @app.route('/')
-def page_not_found():
+def redirect_to_homepage():
     return redirect('/tasks/today')
 
 
