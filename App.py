@@ -1,6 +1,18 @@
 from flask import Flask, render_template, redirect, url_for, request
+from db.config import host, user, port, password, db_name
+import pymysql
 
 app = Flask(__name__)
+
+connection = pymysql.connect(
+    host=host,
+    user=user,
+    port=port,
+    password=password,
+    database=db_name,
+    cursorclass=pymysql.cursors.DictCursor
+)
+print('Succesfully connected!')
 
 
 @app.route('/tasks/today')

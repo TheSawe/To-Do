@@ -2,6 +2,10 @@
   margin: 0;
 }
 
+body{
+  background-color: #faf9f8;
+}
+
 .top_panel{
   background-color: #2564cf;
   width: 100%;
@@ -9,17 +13,44 @@
 }
 
 .top_panel h3{
-  color: #fff !important;
-  font-family: "Roboto", sans-serif;
+  color: #fff;
+  font-family: "Noto Sans", sans-serif;
   font-size: 16px;
-  font-weight: 500;
+  font-weight: 600;
   text-align: left;
   padding-left: 4rem;
   position: relative;
-  top: 50%;
+  top: 20%;
   -ms-transform: translateY(-50%);
   -webkit-transform: translateY(-50%);
   transform: translateY(-50%);
 }
 
+h3{
+  color: #292827;
+  padding-left: 4rem;
+  padding-top: 2rem;
+  font-family: "Noto Sans", sans-serif;
+  font-weight: 500;
+}
+
+.gettask{
+  width: 95%;
+  height: 3rem;
+  background-color: #fff;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.gettask button{
+  width: 3rem;
+  height: 3rem;
+  border: none;
+  background-color: #fff;
+}
+
+.gettask input{
+  width: 100%;
+  border: none;
+}
 
