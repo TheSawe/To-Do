@@ -2,6 +2,101 @@
   margin: 0;
 }
 
+*::-webkit-input-placeholder {
+  color: #2564cf;
+  font-weight: 600;
+  font-family: "Noto Sans", sans-serif;
+}
+
+*:-moz-placeholder {
+  color: #2564cf;
+  opacity: 1;
+  font-weight: 600;
+  font-family: "Noto Sans", sans-serif;
+}
+
+*::-moz-placeholder {
+  color: #2564cf;
+  opacity: 1;
+  font-weight: 600;
+  font-family: "Noto Sans", sans-serif;
+}
+
+*:-ms-input-placeholder {
+  color: #2564cf;
+  font-weight: 600;
+  font-family: "Noto Sans", sans-serif;
+}
+
+*::-ms-input-placeholder {
+  color: #2564cf;
+  font-weight: 600;
+  font-family: "Noto Sans", sans-serif;
+}
+
+*::placeholder {
+  color: #2564cf;
+  font-weight: 600;
+  font-family: "Noto Sans", sans-serif;
+}
+
+input:focus::-webkit-input-placeholder {
+  color: #292827;
+}
+
+input:focus:-moz-placeholder {
+  color: #292827;
+}
+
+input:focus::-moz-placeholder {
+  color: #292827;
+}
+
+input:focus:-ms-input-placeholder {
+  color: #292827;
+}
+
+
+.search_field input::placeholder{
+  color: transparent;
+}
+
+.search_field input::-webkit-input-placeholder{
+  color: transparent;
+}
+
+.search_field input::-moz-placeholder{
+  color: transparent;
+}
+
+.search_field input:-moz-placeholder{
+  color: transparent;
+}
+
+.search_field input:-ms-input-placeholder{
+  color: transparent;
+}
+
+.search_field input::-ms-input-placeholder{
+  color: transparent;
+}
+
+.search_field input:focus::-webkit-input-placeholder{
+  color: #606060;
+}
+
+.search_field input:focus::-moz-placeholder{
+  color: #606060;
+}
+
+.search_field input:focus:-moz-placeholder{
+  color: #606060;
+}
+
+.search_field input:focus:-ms-input-placeholder{
+  color: #606060;
+}
+
 body{
   background-color: #faf9f8;
 }
@@ -15,10 +110,10 @@ body{
 .top_panel h3{
   color: #fff;
   font-family: "Noto Sans", sans-serif;
-  font-size: 16px;
+  font-size: 15px;
   font-weight: 600;
   text-align: left;
-  padding-left: 4rem;
+  padding-left: 58px;
   position: relative;
   top: 20%;
   -ms-transform: translateY(-50%);
@@ -26,31 +121,80 @@ body{
   transform: translateY(-50%);
 }
 
+.search_field{
+  display: flex;
+  width: calc(100% - 197.76px);
+  justify-content: center;
+
+}
+
+.search_field input{
+  width: 384px;
+  height: 2rem;
+  background-color: #fff;
+  margin: 8px 0;
+  border-radius: 4px;
+  border: none;
+  outline: none;
+  font-weight: 700;
+  padding: 0 8px;
+}
+
+@media screen and (max-width: 600px){
+  .search_field{
+    display: none !important;
+  }
+}
+
+.search_field img{
+  position: absolute;
+  width: 32px;
+  height: 32px;
+  padding-top: 7px;
+  padding-right: 370px;
+}
+
 h3{
   color: #292827;
-  padding-left: 4rem;
+  padding-left: 58px;
   padding-top: 2rem;
   font-family: "Noto Sans", sans-serif;
   font-weight: 500;
 }
 
 .gettask{
-  width: 95%;
-  height: 3rem;
+  width: calc(100% - 40px);
+  margin: 0 20px;
+  height: 52px;
   background-color: #fff;
-  margin-left: auto;
-  margin-right: auto;
+  margin-top: 2rem;
 }
 
-.gettask button{
-  width: 3rem;
-  height: 3rem;
-  border: none;
+.btn{
+  display: flex;
+  width: 52px;
+  height: 52px;
+  justify-content:center; 
+  align-items:center; 
+}
+
+.btn button{
+  width: 16px;
+  height: 16px;
   background-color: #fff;
+  border-radius: 90px;
+  border: 1px solid #2564cf;
+  cursor: pointer;
+  float: left;
 }
 
 .gettask input{
-  width: 100%;
+  width: calc(100% - 80px);
+  height: 20px;
+  margin-right: 18px;
   border: none;
+  color: #292827;
+  outline: none;
+  font-size: 14px;
+  margin-top: 15px;
 }
-

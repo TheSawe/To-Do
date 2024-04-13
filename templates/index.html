@@ -15,7 +15,11 @@
 </head>
 <body>
     <div class="top_panel">
-        <h3>To Do</h3>
+        <h3 style="float: left;">To Do</h3>
+        <div class="search_field" style="float: left;">
+            <input placeholder="Поиск">
+            <img src="{{url_for('static', filename='img/loop.jpg')}}">
+        </div>
     </div>
 
     <h3>Мой день</h3>
@@ -23,10 +27,10 @@
     <div class="container">
         <div class="gettask">
             <form action="/result" method="post">
-                <div class="btn">
+                <div class="btn" style="float: left;">
                     <button type="submit"></button>
                 </div>
-                <input type="text" name="input_value" placeholder="Добавить задачу">
+                <input type="text" name="input_value" autocomplete="off" placeholder="Добавить задачу" style="float: left;">
             </form>
         </div>
         <div class="functionality"></div>
