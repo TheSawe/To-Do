@@ -125,33 +125,35 @@ body{
   display: flex;
   width: calc(100% - 197.76px);
   justify-content: center;
-
 }
 
 .search_field input{
-  width: 384px;
+  position: absolute;
+  width: 400px;
   height: 2rem;
+  background: url('/static/img/loop.jpg') no-repeat;
   background-color: #fff;
   margin: 8px 0;
   border-radius: 4px;
   border: none;
   outline: none;
   font-weight: 700;
-  padding: 0 8px;
+  padding: 0 8px 0 36px;
+  box-sizing: border-box;
+  cursor: pointer;
 }
 
-@media screen and (max-width: 600px){
-  .search_field{
-    display: none !important;
+.search_field input:hover{
+  background: url('/static/img/loop_hover.jpg') no-repeat;
+  background-color: #f5f5f5;
+}
+
+@media screen and (max-width: 800px){
+  .search_field input{
+    width: 2rem;
+    height: 2rem;
+    padding: 0;
   }
-}
-
-.search_field img{
-  position: absolute;
-  width: 32px;
-  height: 32px;
-  padding-top: 7px;
-  padding-right: 370px;
 }
 
 h3{
