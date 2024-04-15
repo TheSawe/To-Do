@@ -17,10 +17,10 @@ print('Succesfully connected!')
 
 @app.route('/tasks/today')
 def homepage():
-    return render_template('index.html', action='Мой день')
+    return render_template('main.html', action='Мой день')
 
 
-@app.route('/')
+@app.route('/', methods=['POST', 'GET'])
 def redirect_to_homepage():
     return redirect('/tasks/today')
 
@@ -30,6 +30,10 @@ def result():
     input_value = request.form['input_value']
     print(input_value)
     return redirect('/tasks/today')
+
+@app.route('/<path:anything>')
+def empty(anything):
+    return render_template('not_found.html', error='404')
 
 
 app.run()

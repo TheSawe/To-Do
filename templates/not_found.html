@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{error}} • To Do</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+    <link rel="shortcut icon" href="{{ url_for('static', filename='img/logo.ico')}}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/not_found.css')}}">
+</head>
+<body>
+    <h1>404</h1>
+    <div class="description">
+        <p>You may have made a mistake, there<br>is no such page</p>
+    </div>
+    <div class="btn">
+        <form action="/" method="post">
+            <button type="submit">Back to home page</button>
+        </form>
+    </div>
+    <div class="laws">
+        <p>TheSawe®</p>
+    </div>
+</body>
+</html>
