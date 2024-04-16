@@ -38,9 +38,9 @@ def result():
         connection.commit()
     return redirect('/tasks/today')
 
-@app.route('/<path:anything>')
-def empty(anything):
-    return render_template('not_found.html', error='404')
+@app.errorhandler(404)
+def empty(error):
+    return render_template('not_found.html', error='404'), 404
 
 
-app.run()
+app.run(debug=False, host='0.0.0.0')
