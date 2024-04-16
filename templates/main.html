@@ -35,5 +35,11 @@
         <div class="functionality"></div>
     </div>
 
+    {% if tasks_length %}
+        {% for i in range(tasks_length) %}
+            <h3>{{ tasks[i]['task'] }}</h3>
+        {% endfor %}
+    {% endif %}
+
 </body>
 </html>

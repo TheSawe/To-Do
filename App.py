@@ -17,7 +17,11 @@ print('Succesfully connected!')
 
 @app.route('/tasks/today')
 def homepage():
-    return render_template('main.html', action='Мой день')
+    with connection.cursor() as cursor:
+        select_all_rows = "SELECT * FROM `tasks`"
+        cursor.execute(select_all_rows)
+        rows = cursor.fetchall()
+    return render_template('main.html', action='Мой день', tasks_length=len(rows), tasks=rows)
 
 
 @app.route('/', methods=['POST', 'GET'])
@@ -28,7 +32,10 @@ def redirect_to_homepage():
 @app.route('/result', methods=['POST'])
 def result():
     input_value = request.form['input_value']
-    print(input_value)
+    with connection.cursor() as cursor:
+        insert_query = f"INSERT INTO tasks (task) VALUES ('{input_value}');"
+        cursor.execute(insert_query)
+        connection.commit()
     return redirect('/tasks/today')
 
 @app.route('/<path:anything>')
