@@ -43,4 +43,4 @@ def empty(error):
     return render_template('not_found.html', error='404'), 404
 
 
-app.run(debug=False, host='0.0.0.0')
+app.run()

@@ -37,7 +37,13 @@
 
     {% if tasks_length %}
         {% for i in range(tasks_length) %}
-            <h3>{{ tasks[i]['task'] }}</h3>
+            <div class="task">
+                <div class="btn" style="float: left;">
+                    <button type="submit"></button>
+                </div>
+                <p class="main_text">{{ tasks[i]['task'] }}<p>
+                <p class="bottom_text">Задачи</p>
+            </div>
         {% endfor %}
     {% endif %}
 

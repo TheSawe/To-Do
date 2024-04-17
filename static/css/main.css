@@ -146,6 +146,9 @@ body{
 .search_field input:hover{
   background: url('/static/img/loop_hover.jpg') no-repeat;
   background-color: #f5f5f5;
+  width: 402px;
+  height: 34px;
+  margin: 7px 0;
 }
 
 @media screen and (max-width: 800px){
@@ -170,9 +173,10 @@ h3{
   height: 52px;
   background-color: #fff;
   margin-top: 2rem;
-  -webkit-box-shadow: 0px 5px 5px -5px rgba(34, 60, 80, 0.6);
-  -moz-box-shadow: 0px 5px 5px -5px rgba(34, 60, 80, 0.6);
-  box-shadow: 0px 5px 5px -5px rgba(34, 60, 80, 0.6);
+  -webkit-box-shadow: 0px 1px 4px 0px rgba(34, 60, 80, 0.2);
+  -moz-box-shadow: 0px 1px 4px 0px rgba(34, 60, 80, 0.2);
+  box-shadow: 0px 1px 4px 0px rgba(34, 60, 80, 0.2);
+  border-radius: 6px 6px 0 0;
 }
 
 .btn{
@@ -202,4 +206,35 @@ h3{
   outline: none;
   font-size: 14px;
   margin-top: 15px;
+}
+
+.task{
+  width: calc(100% - 43px);
+  margin: 1rem 23px 0 20px;
+  height: 52px;
+  background-color: #fff;
+  border-radius: 6px;
+  -webkit-box-shadow: 0px 1px 4px 0px rgba(34, 60, 80, 0.2);
+  -moz-box-shadow: 0px 1px 4px 0px rgba(34, 60, 80, 0.2);
+  box-shadow: 0px 1px 4px 0px rgba(34, 60, 80, 0.2);
+}
+
+.main_text{
+  padding-top: 8px;
+  color: #1b1b1b;
+  font-family: 'Noto Sans';
+  font-size: 13px;
+}
+
+.bottom_text{
+  color: #82817f;
+  font-family: 'Noto Sans';
+  font-size: 12px;
+}
+
+.task:hover{
+  background-color: #f5f5f5;
+  .btn button{
+    background-color: #f5f5f5 ;
+  }
 }
