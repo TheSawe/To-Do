@@ -24,7 +24,7 @@ def homepage():
     return render_template('main.html', action='Мой день', tasks_length=len(rows), tasks=rows)
 
 
-@app.route('/', methods=['POST', 'GET'])
+@app.route('/', methods=['POST'])
 def redirect_to_homepage():
     return redirect('/tasks/today')
 
