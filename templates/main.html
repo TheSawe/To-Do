@@ -39,7 +39,9 @@
         {% for i in range(tasks_length) %}
             <div class="task">
                 <div class="btn" style="float: left;">
-                    <button type="submit"></button>
+                    <form action="/delete_task/{{tasks[i]['task']}}" method="post">
+                        <button type="submit"></button>
+                    </form>
                 </div>
                 <p class="main_text">{{ tasks[i]['task'] }}<p>
                 <p class="bottom_text">Задачи</p>

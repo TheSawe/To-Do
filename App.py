@@ -38,6 +38,15 @@ def result():
         connection.commit()
     return redirect('/tasks/today')
 
+@app.route('/delete_task/<task_route>', methods=['POST'])
+def delete_task(task_route):
+    with connection.cursor() as cursor:
+        delete_query = f'DELETE from `tasks` where task="{task_route}";'
+        cursor.execute(delete_query)
+        connection.commit()
+    return redirect('/tasks/today')
+
+
 @app.errorhandler(404)
 def empty(error):
     return render_template('not_found.html', error='404'), 404

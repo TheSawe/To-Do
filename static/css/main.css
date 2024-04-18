@@ -149,6 +149,7 @@ body{
   width: 402px;
   height: 34px;
   margin: 7px 0;
+  padding: 0 8px 0 37px;
 }
 
 @media screen and (max-width: 800px){
