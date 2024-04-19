@@ -107,18 +107,32 @@ body{
   height: 3rem;
 }
 
-.top_panel h3{
+.menu_button{
+  width: 3rem;
+  height: 3rem;
+  background: url(/static/img/menu.jpg) no-repeat center;
+  transition: all .1s ease-out;
+  border: none;
+  margin-right: 10px;
+}
+
+.menu_button:hover{
+  background: url(/static/img/menu_hover.jpg) no-repeat center;
+  background-color: #005a9e;
+}
+
+.top_panel a{
+  padding: 14px 0;
   color: #fff;
   font-family: "Noto Sans", sans-serif;
   font-size: 15px;
   font-weight: 600;
   text-align: left;
-  padding-left: 58px;
-  position: relative;
-  top: 20%;
-  -ms-transform: translateY(-50%);
-  -webkit-transform: translateY(-50%);
-  transform: translateY(-50%);
+  text-decoration: none;
+}
+
+.top_panel a:hover{
+  text-decoration: underline;
 }
 
 .search_field{
@@ -207,6 +221,30 @@ h3{
   outline: none;
   font-size: 14px;
   margin-top: 15px;
+}
+
+.functionality{
+  width: calc(100% - 40px);
+  height: 45px;
+  margin: 1px 20px 0 20px;
+  background-color: #faf9f8;
+  -webkit-box-shadow: 0px 1px 4px 0px rgba(34, 60, 80, 0.2);
+  -moz-box-shadow: 0px 1px 4px 0px rgba(34, 60, 80, 0.2);
+  box-shadow: 0px 1px 4px 0px rgba(34, 60, 80, 0.2);
+  padding: 6.5px 16px;
+  box-sizing: border-box;
+}
+
+.add_task_button{
+  width: 5rem;
+  height: 2rem;
+  border-radius: 0;
+  border: solid 1px #e1dfdd;
+  background-color: #fdfdfd;
+  color: #aa9f9d;
+  font-size: 12px;
+  font-family: 'Noto Sans';
+  cursor: not-allowed;
 }
 
 .task{
