@@ -1,6 +1,8 @@
 from flask import Flask, render_template, redirect, url_for, request
 from db.config import host, user, port, password, db_name
 import pymysql
+from functionality.get_date import get_current_date
+
 
 app = Flask(__name__)
 
@@ -12,7 +14,6 @@ connection = pymysql.connect(
     database=db_name,
     cursorclass=pymysql.cursors.DictCursor
 )
-print('Succesfully connected!')
 
 
 @app.route('/tasks/today')
@@ -21,10 +22,10 @@ def homepage():
         select_all_rows = "SELECT * FROM `tasks`"
         cursor.execute(select_all_rows)
         rows = cursor.fetchall()
-    return render_template('main.html', action='Мой день', tasks_length=len(rows), tasks=rows)
+    return render_template('main.html', action='Мой день', tasks_length=len(rows), tasks=rows, date=get_current_date())
 
 
-@app.route('/', methods=['POST'])
+@app.route('/', methods=['POST', 'GET'])
 def redirect_to_homepage():
     return redirect('/tasks/today')
 
@@ -37,6 +38,7 @@ def result():
         cursor.execute(insert_query)
         connection.commit()
     return redirect('/tasks/today')
+
 
 @app.route('/delete_task/<task_route>', methods=['POST'])
 def delete_task(task_route):
