@@ -166,17 +166,20 @@ body{
   padding: 0 8px 0 37px;
 }
 
-@media screen and (max-width: 800px){
+@media screen and (max-width: 910px){
+  .search_field{
+    justify-content: left;
+  }
   .search_field input{
     width: 2rem;
     height: 2rem;
-    padding: 0;
+    margin-left: 12px;
   }
 }
 
 h3{
   color: #292827;
-  padding-left: 58px;
+  padding-left: 55px;
   padding-top: 2rem;
   font-family: "Noto Sans", sans-serif;
   font-weight: 600;
