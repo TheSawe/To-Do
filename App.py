@@ -1,4 +1,4 @@
-from flask import Flask, render_template, redirect, url_for, request
+from flask import Flask, render_template, redirect, url_for, request, make_response
 from db.config import host, user, port, password, db_name
 import pymysql
 from functionality.get_date import get_current_date
@@ -16,6 +16,20 @@ connection = pymysql.connect(
 )
 
 
+@app.route('/register')
+def registration():
+    return render_template('registration.html')
+
+
+@app.route('/request-to-register', methods=['POST'])
+def requets_to_register():
+    name = request.form['name']
+    email = request.form['email']
+    password = request.form['password']
+    print(f'{name} {email} {password}')
+    return redirect('/tasks/today')
+
+
 @app.route('/tasks/today')
 def homepage():
     with connection.cursor() as cursor:
@@ -27,7 +41,16 @@ def homepage():
 
 @app.route('/', methods=['POST', 'GET'])
 def redirect_to_homepage():
-    return redirect('/tasks/today')
+    return redirect('/register')
+
+@app.route('/cookie')
+def cookie():
+    if not request.cookies.get('foo'):
+        res = make_response("Setting a cookie")
+        res.set_cookie('foo', 'sawe', max_age=60*60)
+    else:
+        res = make_response(f'Value of cookie is {request.cookies.get("foo")}')
+    return res
 
 
 @app.route('/result', methods=['POST'])

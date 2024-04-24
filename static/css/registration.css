@@ -1,0 +1,90 @@
+*{
+    margin: 0;
+}
+
+body{
+    background-color: #2564cf;
+}
+
+.regitration_field{
+    display: block;
+    width: 400px;
+    height: 450px;
+    background-color: #fff;
+    border-radius: 20px;
+    -webkit-box-shadow: 10px 10px 8px 0px rgba(34, 60, 80, 0.2);
+    -moz-box-shadow: 10px 10px 8px 0px rgba(34, 60, 80, 0.2);
+    box-shadow: 10px 10px 8px 0px rgba(34, 60, 80, 0.2);
+    text-align: center;
+    position: absolute;
+    top:0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: auto;
+}
+
+.register{
+    text-align: center;
+    font-family: 'Noto Sans';
+    font-size: 30px;
+    color: #2564cf;
+    margin-top: 40px;
+}
+
+.social_networks button{
+    width: 40px;
+    height: 40px;
+    background-color: #ffffff;
+    border: solid 2px #ececec;
+    border-radius: 20rem;
+    margin: 30px 5px;
+    color: #ececec;
+    transition: all .3s ease;
+}
+
+.social_networks button:hover{
+    border-color: #cfcfcf;
+    color: #cfcfcf;
+}
+
+.inputs input{
+    --indent: 80%;
+    width: var(--indent);
+    height: 40px;
+    margin: 0 calc((100% - var(--indent)) / 2);
+    display: block;
+    margin-bottom: 1rem;
+    border: none;
+    background-color: #eee;
+    padding: 0 10px;
+    box-sizing: border-box;
+    outline: none;
+    font-family: 'Noto Sans';
+}
+
+input:hover{
+    background-color: #eaeaea;
+}
+
+.reg_button{
+    width: 12rem;
+    height: 40px;
+    border: none;
+    color: #fff;
+    border-radius: 20px;
+    background-color: #2564cf;
+    font-family: 'Noto Sans';
+    font-size: 14px;
+    margin-top: 10px;
+}
+
+.laws p{
+    position: fixed;
+    text-align: center;
+    bottom: 10px;
+    width: 100%;
+    color: #fff;
+    font-family: 'Noto Sans';
+    font-size: 13px;
+}

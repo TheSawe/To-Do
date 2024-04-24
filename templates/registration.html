@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register • To Do</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+    <link rel="shortcut icon" href="{{ url_for('static', filename='img/logo.ico')}}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/registration.css')}}">
+    <link href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css' rel='stylesheet' type='text/css'/>
+</head>
+<body>
+    <div class="regitration_field">
+        <h1 class="register">Register To Do</h1>
+        <div class="social_networks">
+            <button class="facebook" style="font-family: Arial, FontAwesome;">&#xf09a;</button>
+            <button class="twitter" style="font-family: Arial, FontAwesome;">&#xf099;</button>
+            <button class="google_plus" style="font-family: Arial, FontAwesome;">&#xf0d5;</button>
+        </div>
+        <form action="/request-to-register" method="post">
+            <div class="inputs">
+                <input type="text" class="name" name="name" placeholder="&#xf007; Name" style="font-family:Arial, FontAwesome">
+                <input type="email" class="email" name="email" placeholder="&#xf003; Email" style="font-family:Arial, FontAwesome">
+                <input type="password" class="password" name="password" placeholder="&#xf023; Password" style="font-family:Arial, FontAwesome">
+            </div>
+            <button class="reg_button" type="submit">Register</button>
+        </form>
+    </div>
+    <div class="laws">
+        <p>TheSawe®</p>
+    </div>
+</body>
+</html>
