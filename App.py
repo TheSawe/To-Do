@@ -1,24 +1,18 @@
 from flask import Flask, render_template, redirect, url_for, request, make_response
-from db.config import host, user, port, password, db_name
-import pymysql
-from functionality.get_date import get_current_date
+import sys
+
+sys.path.append('./functionality')
+from connect_to_db import connection
+from get_date import get_current_date
+from valid_data import valid_data
 
 
 app = Flask(__name__)
 
-connection = pymysql.connect(
-    host=host,
-    user=user,
-    port=port,
-    password=password,
-    database=db_name,
-    cursorclass=pymysql.cursors.DictCursor
-)
-
 
 @app.route('/register')
 def registration():
-    return render_template('registration.html')
+    return render_template('start_with.html', identifier=0)
 
 
 @app.route('/request-to-register', methods=['POST'])
@@ -26,9 +20,18 @@ def requets_to_register():
     name = request.form['name']
     email = request.form['email']
     password = request.form['password']
-    print(f'{name} {email} {password}')
-    return redirect('/tasks/today')
+    if valid_data(name=name, email=email, password=password):
+        with connection.cursor() as cursor:
+            insert_query = f"INSERT INTO to_do_users (name, email, password) VALUES ('{name}', '{email}', '{password}');"
+            cursor.execute(insert_query)
+            connection.commit()
+        return redirect('/sign-in')
+    else:
+        return redirect('/register')
 
+@app.route('/sign-in')
+def sign_in():
+    return render_template('start_with.html', identifier=1)
 
 @app.route('/tasks/today')
 def homepage():
@@ -63,7 +66,7 @@ def result():
     return redirect('/tasks/today')
 
 
-@app.route('/delete_task/<task_route>', methods=['POST'])
+@app.route('/delete-task/<task_route>', methods=['POST'])
 def delete_task(task_route):
     with connection.cursor() as cursor:
         delete_query = f'DELETE from `tasks` where task="{task_route}";'

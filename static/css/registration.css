@@ -41,6 +41,7 @@ body{
     margin: 30px 5px;
     color: #ececec;
     transition: all .3s ease;
+    cursor: pointer;
 }
 
 .social_networks button:hover{
@@ -77,6 +78,7 @@ input:hover{
     font-family: 'Noto Sans';
     font-size: 14px;
     margin-top: 10px;
+    cursor: pointer;
 }
 
 .laws p{
