@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    {% if identifier%}
+    {% if identifier %}
         <title>Sign In • To Do</title>
     {% else %}
         <title>Register • To Do</title>
@@ -17,7 +17,7 @@
 </head>
 <body>
     <div class="regitration_field">
-        {% if identifier%}
+        {% if identifier %}
             <h1 class="register">Sign In - To Do</h1>
         {% else %}
             <h1 class="register">Register - To Do</h1>
@@ -27,23 +27,24 @@
             <button class="twitter" style="font-family: Arial, FontAwesome;">&#xf099;</button>
             <button class="google_plus" style="font-family: Arial, FontAwesome;">&#xf0d5;</button>
         </div>
-        <form action="/request-to-register" method="post">
-            <div class="inputs">
-                {% if identifier%}
+        {% if identifier %}
+            <form action="/request-to-sign-in" method="post">
+                <div class="inputs">
                     <input autocomplete="off" type="text" class="name" name="name" placeholder="&#xf007; Name" style="font-family:Arial, FontAwesome; margin-top: 28px;">
                     <input type="password" class="password" name="password" placeholder="&#xf023; Password" style="font-family:Arial, FontAwesome; margin-bottom: 28px;">
-                {% else %}
+                </div>
+                <button class="reg_button" type="submit">Sign In</button>
+            </form>
+        {% else %}
+            <form action="/request-to-register" method="post">
+                <div class="inputs">
                     <input autocomplete="off" type="text" class="name" name="name" placeholder="&#xf007; Name" style="font-family:Arial, FontAwesome">
                     <input autocomplete="off" type="email" class="email" name="email" placeholder="&#xf003; Email" style="font-family:Arial, FontAwesome">
                     <input type="password" class="password" name="password" placeholder="&#xf023; Password" style="font-family:Arial, FontAwesome">
-                {% endif %}
-            </div>
-            {% if identifier%}
-                <button class="reg_button" type="submit">Sign In</button>
-            {% else %}
+                </div>
                 <button class="reg_button" type="submit">Register</button>
-            {% endif %}
-        </form>
+            </form>
+        {% endif %}
     </div>
     <div class="laws">
         <p>TheSawe®</p>

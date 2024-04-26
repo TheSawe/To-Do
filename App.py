@@ -33,6 +33,21 @@ def requets_to_register():
 def sign_in():
     return render_template('start_with.html', identifier=1)
 
+@app.route('/request-to-sign-in', methods=['POST'])
+def request_to_sign_in():
+    name = request.form['name']
+    password = request.form['password']
+    with connection.cursor() as cursor:
+        select_all_rows = "SELECT * FROM `to_do_users`"
+        cursor.execute(select_all_rows)
+        rows = cursor.fetchall()
+        for row in rows:
+            if row['name'] == name and row['password'] == password:
+                cookie(name=name, password=password)
+                return redirect('/tasks/today')
+    return redirect('/sign-in')
+    
+
 @app.route('/tasks/today')
 def homepage():
     with connection.cursor() as cursor:
@@ -47,12 +62,9 @@ def redirect_to_homepage():
     return redirect('/register')
 
 @app.route('/cookie')
-def cookie():
-    if not request.cookies.get('foo'):
-        res = make_response("Setting a cookie")
-        res.set_cookie('foo', 'sawe', max_age=60*60)
-    else:
-        res = make_response(f'Value of cookie is {request.cookies.get("foo")}')
+def cookie(name, password):
+    res = make_response("Setting a cookie")
+    res.set_cookie('personal_data', f'name:{name},password:{password}', max_age=60)
     return res
 
 
