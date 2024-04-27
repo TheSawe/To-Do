@@ -90,3 +90,19 @@ input:hover{
     font-family: 'Noto Sans';
     font-size: 13px;
 }
+
+.sign-reg-links{
+    color: #2564cf;
+    font-family: 'Noto Sans';
+    font-size: 13px;
+    text-decoration: none;
+    display: block;
+    position: absolute;
+    bottom: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.sign-reg-links:hover{
+    text-decoration: underline;
+}
