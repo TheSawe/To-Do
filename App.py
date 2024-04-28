@@ -71,7 +71,7 @@ def homepage():
 
 @app.route('/', methods=['POST', 'GET'])
 def redirect_to_homepage():
-    return redirect('/register')
+    return redirect('/sign-in')
 
 @app.route('/leave-account')
 def leave_account():
