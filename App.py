@@ -5,7 +5,7 @@ sys.path.append('./functionality')
 from functionality.connect_to_db import connection
 from functionality.get_date import get_current_date
 from functionality.valid_data import valid_data
-from functionality.hash_passord import hash
+from functionality.hash_password import hash
 
 
 app = Flask(__name__)
@@ -29,6 +29,9 @@ def requets_to_register():
                 insert_query = f"INSERT INTO to_do_users (name, email, password) VALUES ('{name}', '{email}', '{hash(password)}');"
                 cursor.execute(insert_query)
                 connection.commit()
+
+                create_user_db = f'CREATE TABLE {name} (id INT AUTO_INCREMENT PRIMARY KEY, task VARCHAR(255) NOT NULL);'
+                cursor.execute(create_user_db)
             return redirect('/sign-in')
         else:
             return redirect('/register')
@@ -62,7 +65,7 @@ def request_to_sign_in():
 def homepage():
     try:
         with connection.cursor() as cursor:
-            select_rows = f"SELECT * FROM `tasks` where owner='{request.cookies.get('personal_data').split()[0][5:]}'"
+            select_rows = f"SELECT * FROM `{request.cookies.get('personal_data').split()[0][5:]}`;"
             cursor.execute(select_rows)
             rows = cursor.fetchall()
         return render_template('main.html', action='Мой день', tasks_length=len(rows), tasks=rows, date=get_current_date())
@@ -92,7 +95,7 @@ def result():
     input_value = request.form['input_value']
     if input_value:
         with connection.cursor() as cursor:
-            insert_query = f"INSERT INTO tasks (task, owner) VALUES ('{input_value}', '{request.cookies.get('personal_data').split()[0][5:]}');"
+            insert_query = f"INSERT INTO {request.cookies.get('personal_data').split()[0][5:]} (task) VALUES ('{input_value}');"
             cursor.execute(insert_query)
             connection.commit()
     return redirect('/tasks/today')
@@ -101,7 +104,7 @@ def result():
 @app.route('/delete-task/<task_route>', methods=['POST'])
 def delete_task(task_route):
     with connection.cursor() as cursor:
-        delete_query = f'DELETE from `tasks` where task="{task_route}" LIMIT 1;'
+        delete_query = f"DELETE from `{request.cookies.get('personal_data').split()[0][5:]}` where id={task_route};"
         cursor.execute(delete_query)
         connection.commit()
     return redirect('/tasks/today')
