@@ -17,6 +17,10 @@ def registration():
         return redirect('/tasks/today')
     return render_template('start_with.html', identifier=0)
 
+@app.route('/register/<error>')
+def error_registration(error):
+    return render_template('start_with.html', identifier=0, error=error)
+
 
 @app.route('/request-to-register', methods=['POST', 'GET'])
 def requets_to_register():
@@ -24,7 +28,8 @@ def requets_to_register():
         name = request.form['name']
         email = request.form['email']
         password = request.form['password']
-        if valid_data(name=name, email=email, password=password):
+        check_data = valid_data(name=name, email=email, password=password)
+        if check_data is True:
             with connection.cursor() as cursor:
                 insert_query = f"INSERT INTO to_do_users (name, email, password) VALUES ('{name}', '{email}', '{hash(password)}');"
                 cursor.execute(insert_query)
@@ -34,7 +39,7 @@ def requets_to_register():
                 cursor.execute(create_user_db)
             return redirect('/sign-in')
         else:
-            return redirect('/register')
+            return redirect(f'/register/{check_data}')
     else:
         return redirect('/tasks/today')
 

@@ -12,7 +12,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
     <link rel="shortcut icon" href="{{ url_for('static', filename='img/logo.ico')}}">
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/registration.css')}}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/start_with.css')}}">
     <link href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css' rel='stylesheet' type='text/css'/>
 </head>
 <body>
@@ -40,8 +40,19 @@
             <form action="/request-to-register" method="post">
                 <div class="inputs">
                     <input autocomplete="off" type="text" class="name" name="name" placeholder="&#xf007; Name" style="font-family:Arial, FontAwesome">
+                    {% if error=='short-name'%}
+                        <p class="error">• short name</p>
+                    {% elif  error=='name-already-using'%}
+                        <p class="error">• name is already using</p>
+                    {% endif %}
                     <input autocomplete="off" type="email" class="email" name="email" placeholder="&#xf003; Email" style="font-family:Arial, FontAwesome">
+                    {% if error=='email-already-using'%}
+                        <p class="error">• email already using</p>
+                    {% endif %}
                     <input type="password" class="password" name="password" placeholder="&#xf023; Password" style="font-family:Arial, FontAwesome">
+                    {% if error=='simple-password'%}
+                        <p class="error">• simple password</p>
+                    {% endif %}
                 </div>
                 <button class="reg_button" type="submit">Register</button>
             </form>
