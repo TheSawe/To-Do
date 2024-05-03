@@ -72,7 +72,7 @@ def homepage():
         with connection.cursor() as cursor:
             select_rows = f"SELECT * FROM `{request.cookies.get('personal_data').split()[0][5:]}`;"
             cursor.execute(select_rows)
-            rows = cursor.fetchall()
+            rows = cursor.fetchall()[::-1]
         return render_template('main.html', action='Мой день', tasks_length=len(rows), tasks=rows, date=get_current_date())
     except:
         return redirect('/sign-in')
