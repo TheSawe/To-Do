@@ -119,5 +119,5 @@ def delete_task(task_route):
 def empty(error):
     return render_template('not_found.html', error='404'), 404
 
-
-app.run()
+if __name__ == '__main__':
+    app.run()
