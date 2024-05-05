@@ -1,16 +1,15 @@
-import pymysql
+import psycopg2
 import sys
 
-sys.path.append('./mydatabase')
+sys.path.append('./postgres_db')
 
 from config import host, user, port, password, db_name
 
 
-connection = pymysql.connect(
+connection = psycopg2.connect(
     host=host,
     user=user,
-    port=port,
     password=password,
-    database=db_name,
-    cursorclass=pymysql.cursors.DictCursor
+    dbname=db_name
 )
+connection.autocommit = True

@@ -35,7 +35,7 @@ def requets_to_register():
                 cursor.execute(insert_query)
                 connection.commit()
 
-                create_user_db = f'CREATE TABLE {name} (id INT AUTO_INCREMENT PRIMARY KEY, task VARCHAR(255) NOT NULL);'
+                create_user_db = f'CREATE TABLE {name} (id SERIAL PRIMARY KEY, task TEXT);'
                 cursor.execute(create_user_db)
             return redirect('/sign-in')
         else:
@@ -55,11 +55,11 @@ def request_to_sign_in():
         name = request.form['name']
         password = request.form['password']
         with connection.cursor() as cursor:
-            select_all_rows = "SELECT * FROM `to_do_users`"
-            cursor.execute(select_all_rows)
+            connection.rollback()
+            cursor.execute("SELECT * FROM to_do_users")
             rows = cursor.fetchall()
             for row in rows:
-                if row['name'] == name and row['password'] == hash(password):
+                if row[0] == name and row[2] == hash(password):
                     return redirect(f'/cookie/{name}/{hash(password)}')
         return redirect('/sign-in')
     else:
@@ -68,13 +68,13 @@ def request_to_sign_in():
 
 @app.route('/tasks/today')
 def homepage():
-    try:
+    if request.cookies.get('personal_data'):
         with connection.cursor() as cursor:
-            select_rows = f"SELECT * FROM `{request.cookies.get('personal_data').split()[0][5:]}`;"
+            select_rows = f"SELECT * FROM {request.cookies.get('personal_data').split()[0][5:].lower()};"
             cursor.execute(select_rows)
             rows = cursor.fetchall()[::-1]
         return render_template('main.html', action='Мой день', tasks_length=len(rows), tasks=rows, date=get_current_date())
-    except:
+    else:
         return redirect('/sign-in')
 
 @app.route('/', methods=['POST', 'GET'])
@@ -100,18 +100,16 @@ def result():
     input_value = request.form['input_value']
     if input_value:
         with connection.cursor() as cursor:
-            insert_query = f"INSERT INTO {request.cookies.get('personal_data').split()[0][5:]} (task) VALUES ('{input_value}');"
+            insert_query = f"INSERT INTO {request.cookies.get('personal_data').split()[0][5:].lower()} (task) VALUES ('{input_value}');"
             cursor.execute(insert_query)
-            connection.commit()
     return redirect('/tasks/today')
 
 
 @app.route('/delete-task/<task_route>', methods=['POST'])
 def delete_task(task_route):
     with connection.cursor() as cursor:
-        delete_query = f"DELETE from `{request.cookies.get('personal_data').split()[0][5:]}` where id={task_route};"
+        delete_query = f"DELETE from {request.cookies.get('personal_data').split()[0][5:].lower()} where id={task_route};"
         cursor.execute(delete_query)
-        connection.commit()
     return redirect('/tasks/today')
 
 
