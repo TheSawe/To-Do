@@ -118,4 +118,4 @@ def empty(error):
     return render_template('not_found.html', error='404'), 404
 
 if __name__ == '__main__':
-    app.run()
+    app.run(debug=False)

@@ -1,7 +1,7 @@
 import psycopg2
 import sys
 
-sys.path.append('./postgres_db')
+sys.path.append('./postgre_db')
 
 from config import host, user, port, password, db_name
 

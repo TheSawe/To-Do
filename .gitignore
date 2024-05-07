@@ -1,3 +1,5 @@
 .vercel/
-functionality/__pyache__
+functionality/__pycache__/
 postgre_db/
+__pycache__/
+.idea/
