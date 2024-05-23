@@ -93,7 +93,11 @@ def cookie(name, password):
     res.set_cookie('personal_data', f'name:{name} password:{password}', max_age=60*60*24*15)
     return res
 
-
+@app.route('/tasks/search', methods=['POST'])
+def search():
+    search_req = request.form['search-field']
+    print(search_req)
+    return redirect('/tasks/today')
 
 @app.route('/result', methods=['POST'])
 def result():

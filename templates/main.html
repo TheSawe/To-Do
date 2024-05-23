@@ -17,9 +17,11 @@
     <div class="top_panel">
         <button style="float: left;" class="menu_button"></button>
         <a style="float: left;" href="/">To Do</a>
-        <div class="search_field" style="float: left;">
-            <input placeholder="Поиск">
-        </div>
+        <form action="/tasks/search" method="post">
+            <div class="search_field" style="float: left;">
+                <input placeholder="Поиск" name="search-field" autocomplete="off">
+            </div>
+        </form>
         <a style="float: right; font-size: 13px; margin-right: 20px;" href="/leave-account">Выйти</a>
     </div>
 
@@ -39,23 +41,6 @@
         <div class="functionality">
         </div>
     </div>
-
-    <script>
-        var input = document.getElementById('task_input');
-        const add_button = document.getElementById('i_add');
-        const el = document.querySelector('button.add_task_button')
-      
-        input.addEventListener('input', function() {
-          var newValue = input.value;
-          if (newValue.length){
-            add_button.className = 'active_button';
-            el.setAttribute('type', 'submit')
-          } else{
-            add_button.className = 'add_task_button';
-            el.setAttribute('type', 'button')
-          }
-        });
-    </script>
 
     {% if tasks_length %}
         {% for i in range(tasks_length) %}
