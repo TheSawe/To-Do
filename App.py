@@ -64,7 +64,6 @@ def request_to_sign_in():
         return redirect('/sign-in')
     else:
         return redirect('/tasks/today')
-    
 
 @app.route('/tasks/today')
 def homepage():
@@ -96,8 +95,18 @@ def cookie(name, password):
 @app.route('/tasks/search', methods=['POST'])
 def search():
     search_req = request.form['search-field']
-    print(search_req)
-    return redirect('/tasks/today')
+    if search_req:
+        return redirect(f'/tasks/search/{search_req}')
+    else:
+        return redirect('/tasks/today')
+    
+@app.route('/tasks/search/<string:req>')
+def search_tasks(req):
+    with connection.cursor() as cursor:
+            select_rows = f"SELECT * FROM {request.cookies.get('personal_data').split()[0][5:].lower()} WHERE task ILIKE '%{req}%';"
+            cursor.execute(select_rows)
+            rows = cursor.fetchall()
+            return render_template('search.html', req=req, tasks_length=len(rows), tasks=rows)
 
 @app.route('/result', methods=['POST'])
 def result():

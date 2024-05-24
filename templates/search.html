@@ -1,16 +1,14 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
-    <title>{{action}} • To Do</title>
+    <title>Поиск по запросу “{{req}}” • To Do</title>
     <link rel="shortcut icon" href="{{ url_for('static', filename='img/logo.ico')}}">
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css')}}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/search.css')}}">
 </head>
 <body>
     <div class="top_panel">
@@ -18,28 +16,13 @@
         <a style="float: left;" href="/">To Do</a>
         <form action="/tasks/search" method="post">
             <div class="search_field" style="float: left;">
-                <input placeholder="Поиск" name="search-field" autocomplete="off">
+                <input placeholder="Поиск" name="search-field" autocomplete="off" value="{{req}}">
             </div>
         </form>
         <a style="float: right; font-size: 13px; margin-right: 20px;" href="/leave-account">Выйти</a>
     </div>
 
-    <h3>Мой день</h3>
-    <p class="date">{{date}}</p>
-
-    <div class="container">
-        <div class="gettask">
-            <div class="btn" style="float: left;">
-                <button type="submit"></button>
-            </div>
-            <form action="/result" method="post">
-                <input type="text" name="input_value" autocomplete="off" placeholder="Добавить задачу" style="float: left;" id="task_input">
-                <button style="float: right;" class="add_task_button" id="i_add" type="button">Добавить</button>
-            </form>
-        </div>
-        <div class="functionality">
-        </div>
-    </div>
+    <h3>Поиск по запросу “{{req}}”</h3>
 
     {% if tasks_length %}
         {% for i in range(tasks_length) %}
@@ -54,6 +37,5 @@
             </div>
         {% endfor %}
     {% endif %}
-    <script src="{{ url_for('static', filename='js/script.js')}}"></script>
 </body>
 </html>
