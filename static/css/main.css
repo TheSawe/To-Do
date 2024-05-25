@@ -110,14 +110,14 @@ body{
 .menu_button{
   width: 3rem;
   height: 3rem;
-  background: url(/static/img/menu.jpg) no-repeat center;
+  background: url(/static/img/menu.svg) no-repeat center;
   transition: all .1s ease-out;
   border: none;
   margin-right: 10px;
 }
 
 .menu_button:hover{
-  background: url(/static/img/menu_hover.jpg) no-repeat center;
+  background: url(/static/img/menu_hover.svg) no-repeat center;
   background-color: #005a9e;
 }
 
@@ -145,25 +145,26 @@ body{
   position: absolute;
   width: 400px;
   height: 2rem;
-  background: url('/static/img/loop.jpg') no-repeat;
+  background: url('/static/img/loop.svg') no-repeat left center;
   background-color: #fff;
   margin: 8px 0;
   border-radius: 4px;
+  padding: 0 20px 0 36px;
   border: none;
   outline: none;
   font-weight: 700;
-  padding: 0 8px 0 36px;
   box-sizing: border-box;
   cursor: pointer;
 }
 
 .search_field input:hover{
-  background: url('/static/img/loop_hover.jpg') no-repeat;
+  background: url('/static/img/loop_hover.svg') no-repeat left center;
+  background-position: 1px;
   background-color: #f5f5f5;
   width: 402px;
   height: 34px;
   margin: 7px 0;
-  padding: 0 8px 0 37px;
+  padding-left: 37px;
 }
 
 @media screen and (max-width: 910px){
@@ -177,10 +178,10 @@ body{
     padding: 0;
   }
   .search_field input:hover{
+    background: url('/static/img/loop_hover.svg') no-repeat left center;
     width: 2rem;
     height: 2rem;
     margin-left: 12px;
-    padding: 0;
   }
 }
 
@@ -314,6 +315,6 @@ h3{
     background-color: #f5f5f5;
   }
   .btn button:hover{
-    background: url('/static/img/galochka.jpg') no-repeat center;
+    background: url('/static/img/galochka.svg') no-repeat center;
   }
 }
