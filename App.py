@@ -30,6 +30,7 @@ def requets_to_register():
         password = request.form['password']
         check_data = valid_data(name=name, email=email, password=password)
         if check_data is True:
+            from functionality.connect_to_db import connection
             with connection.cursor() as cursor:
                 insert_query = f"INSERT INTO to_do_users (name, email, password) VALUES ('{name}', '{email}', '{hash(password)}');"
                 cursor.execute(insert_query)
@@ -54,6 +55,7 @@ def request_to_sign_in():
     if request.method == 'POST':
         name = request.form['name']
         password = request.form['password']
+        from functionality.connect_to_db import connection
         with connection.cursor() as cursor:
             connection.rollback()
             cursor.execute("SELECT * FROM to_do_users")
@@ -68,6 +70,7 @@ def request_to_sign_in():
 @app.route('/tasks/today')
 def homepage():
     if request.cookies.get('personal_data'):
+        from functionality.connect_to_db import connection
         with connection.cursor() as cursor:
             select_rows = f"SELECT * FROM {request.cookies.get('personal_data').split()[0][5:].lower()};"
             cursor.execute(select_rows)
@@ -102,6 +105,7 @@ def search():
     
 @app.route('/tasks/search/<string:req>')
 def search_tasks(req):
+    from functionality.connect_to_db import connection
     with connection.cursor() as cursor:
             select_rows = f"SELECT * FROM {request.cookies.get('personal_data').split()[0][5:].lower()} WHERE task ILIKE '%{req}%';"
             cursor.execute(select_rows)
@@ -112,6 +116,7 @@ def search_tasks(req):
 def result():
     input_value = request.form['input_value']
     if input_value:
+        from functionality.connect_to_db import connection
         with connection.cursor() as cursor:
             insert_query = f"INSERT INTO {request.cookies.get('personal_data').split()[0][5:].lower()} (task) VALUES ('{input_value}');"
             cursor.execute(insert_query)
@@ -120,6 +125,7 @@ def result():
 
 @app.route('/delete-task/<task_route>', methods=['POST'])
 def delete_task(task_route):
+    from functionality.connect_to_db import connection
     with connection.cursor() as cursor:
         delete_query = f"DELETE from {request.cookies.get('personal_data').split()[0][5:].lower()} where id={task_route};"
         cursor.execute(delete_query)
