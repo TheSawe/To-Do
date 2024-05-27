@@ -1,11 +1,13 @@
 from flask import Flask, render_template, redirect, url_for, request, make_response
+import psycopg2
 import sys
+sys.path.append('./app/postgre_db')
+from config import host, user, password, db_name
 
-sys.path.append('./functionality')
-from functionality.connect_to_db import connection
-from functionality.get_date import get_current_date
-from functionality.valid_data import valid_data
-from functionality.hash_password import hash
+sys.path.append('./app/functionality')
+from app.functionality.get_date import get_current_date
+from app.functionality.valid_data import valid_data
+from app.functionality.hash_password import hash
 
 
 app = Flask(__name__)
@@ -30,7 +32,13 @@ def requets_to_register():
         password = request.form['password']
         check_data = valid_data(name=name, email=email, password=password)
         if check_data is True:
-            from functionality.connect_to_db import connection
+            connection = psycopg2.connect(
+                host=host,
+                user=user,
+                password=password,
+                dbname=db_name
+            )
+            connection.autocommit = True
             with connection.cursor() as cursor:
                 insert_query = f"INSERT INTO to_do_users (name, email, password) VALUES ('{name}', '{email}', '{hash(password)}');"
                 cursor.execute(insert_query)
@@ -38,6 +46,7 @@ def requets_to_register():
 
                 create_user_db = f'CREATE TABLE {name} (id SERIAL PRIMARY KEY, task TEXT);'
                 cursor.execute(create_user_db)
+                connection.close()
             return redirect('/sign-in')
         else:
             return redirect(f'/register/{check_data}')
@@ -55,9 +64,14 @@ def request_to_sign_in():
     if request.method == 'POST':
         name = request.form['name']
         password = request.form['password']
-        from functionality.connect_to_db import connection
+        connection = psycopg2.connect(
+            host=host,
+            user=user,
+            password=password,
+            dbname=db_name
+        )
+        connection.autocommit = True
         with connection.cursor() as cursor:
-            connection.rollback()
             cursor.execute("SELECT * FROM to_do_users")
             rows = cursor.fetchall()
             for row in rows:
@@ -70,11 +84,19 @@ def request_to_sign_in():
 @app.route('/tasks/today')
 def homepage():
     if request.cookies.get('personal_data'):
-        from functionality.connect_to_db import connection
+        connection = psycopg2.connect(
+            host=host,
+            user=user,
+            password=password,
+            dbname=db_name
+        )
+        connection.autocommit = True
+
         with connection.cursor() as cursor:
             select_rows = f"SELECT * FROM {request.cookies.get('personal_data').split()[0][5:].lower()};"
             cursor.execute(select_rows)
             rows = cursor.fetchall()[::-1]
+            connection.close()
         return render_template('main.html', action='Мой день', tasks_length=len(rows), tasks=rows, date=get_current_date())
     else:
         return redirect('/sign-in')
@@ -105,30 +127,52 @@ def search():
     
 @app.route('/tasks/search/<string:req>')
 def search_tasks(req):
-    from functionality.connect_to_db import connection
+    connection = psycopg2.connect(
+        host=host,
+        user=user,
+        password=password,
+        dbname=db_name
+    )
+    connection.autocommit = True
+
     with connection.cursor() as cursor:
             select_rows = f"SELECT * FROM {request.cookies.get('personal_data').split()[0][5:].lower()} WHERE task ILIKE '%{req}%';"
             cursor.execute(select_rows)
             rows = cursor.fetchall()
+            connection.close()
             return render_template('search.html', req=req, tasks_length=len(rows), tasks=rows)
 
 @app.route('/result', methods=['POST'])
 def result():
     input_value = request.form['input_value']
     if input_value:
-        from functionality.connect_to_db import connection
+        connection = psycopg2.connect(
+            host=host,
+            user=user,
+            password=password,
+            dbname=db_name
+        )
+        connection.autocommit = True
         with connection.cursor() as cursor:
             insert_query = f"INSERT INTO {request.cookies.get('personal_data').split()[0][5:].lower()} (task) VALUES ('{input_value}');"
             cursor.execute(insert_query)
+            connection.close()
     return redirect('/tasks/today')
 
 
 @app.route('/delete-task/<task_route>', methods=['POST'])
 def delete_task(task_route):
-    from functionality.connect_to_db import connection
+    connection = psycopg2.connect(
+        host=host,
+        user=user,
+        password=password,
+        dbname=db_name
+    )
+    connection.autocommit = True
     with connection.cursor() as cursor:
         delete_query = f"DELETE from {request.cookies.get('personal_data').split()[0][5:].lower()} where id={task_route};"
         cursor.execute(delete_query)
+        connection.close()
     return redirect('/tasks/today')
 
 
@@ -136,5 +180,3 @@ def delete_task(task_route):
 def empty(error):
     return render_template('not_found.html', error='404'), 404
 
-if __name__ == '__main__':
-    app.run(debug=False)

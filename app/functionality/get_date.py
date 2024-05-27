@@ -1,5 +1,5 @@
 import datetime
-from functionality.storage import weekdays, months
+from app.functionality.storage import weekdays, months
 
 
 def get_current_date():
